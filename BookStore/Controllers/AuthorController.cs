@@ -79,7 +79,8 @@ namespace BookStore.Controllers
         // GET: AuthorController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var author = _authorRepository.Find(id);
+            return View(author);
         }
 
         // POST: AuthorController/Delete/5

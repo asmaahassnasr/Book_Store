@@ -112,3 +112,4 @@ E:\Book_Store\BookStore\obj\Debug\netcoreapp3.1\Razor\Views\Author\Edit.cshtml.g
 E:\Book_Store\BookStore\obj\Debug\netcoreapp3.1\Razor\Views\Author\Delete.cshtml.g.cs
 E:\Book_Store\BookStore\obj\Debug\netcoreapp3.1\Razor\Views\Book\Index.cshtml.g.cs
 E:\Book_Store\BookStore\obj\Debug\netcoreapp3.1\Razor\Views\Book\Details.cshtml.g.cs
+E:\Book_Store\BookStore\obj\Debug\netcoreapp3.1\Razor\Views\Book\Create.cshtml.g.cs

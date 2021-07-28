@@ -2,6 +2,7 @@
 using BookStore.Models.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BookStore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace BookStore.Controllers
     public class BookController : Controller
     {
         private IBookRepository<Book> _bookRepository;
+        private IBookRepository<Author> _authorRepos;
 
-        public BookController(IBookRepository<Book> bookRepository)
+        public BookController(IBookRepository<Book> bookRepository , IBookRepository<Author> authorRepos)
         {
             _bookRepository = bookRepository;
+            _authorRepos = authorRepos;
         }
         // GET: BookController
         public ActionResult Index()
@@ -34,7 +37,11 @@ namespace BookStore.Controllers
         // GET: BookController/Create
         public ActionResult Create()
         {
-            return View();
+            var model = new BookAuthorViewModel
+            {
+                Authors = _authorRepos.List().ToList()
+            };
+            return View(model);
         }
 
         // POST: BookController/Create

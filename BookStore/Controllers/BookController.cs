@@ -48,10 +48,18 @@ namespace BookStore.Controllers
         // POST: BookController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(BookAuthorViewModel model)
         {
             try
             {
+                Book b = new Book
+                {
+                    Id = model.BookId,
+                    Title = model.Title,
+                    Description = model.Description,
+                    Author = _authorRepos.Find(model.AuthorId)
+                };
+                _bookRepository.Add(b);
                 return RedirectToAction(nameof(Index));
             }
             catch

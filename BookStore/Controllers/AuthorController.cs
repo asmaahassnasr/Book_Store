@@ -56,7 +56,8 @@ namespace BookStore.Controllers
         // GET: AuthorController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var author = _authorRepository.Find(id);
+            return View(author);
         }
 
         // POST: AuthorController/Edit/5

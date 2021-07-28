@@ -21,6 +21,8 @@ namespace BookStore.Models.Repositories
         }
         public void Add(Author entity)
         {
+            // Generate ID from Code 
+            entity.Id = authors.Max(a => a.Id) + 1;
             authors.Add(entity);
         }
 

@@ -86,10 +86,11 @@ namespace BookStore.Controllers
         // POST: AuthorController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Author author)
         {
             try
             {
+                _authorRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -21,11 +21,12 @@ namespace BookStore.Models.Repositories
         }
         public void Add(Book entity)
         {
-            // Generate ID from Code 
-            entity.Id = books.Max(a => a.Id) + 1;
             books.Add(entity);
         }
-
+        public int GetComputedId()
+        {
+            return  books.Max(b => b.Id) + 1;
+        }
         public void Delete(int id)
         {
             var book = Find(id);

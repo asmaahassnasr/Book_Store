@@ -22,10 +22,13 @@ namespace BookStore.Models.Repositories
         public void Add(Author entity)
         {
             // Generate ID from Code 
-            entity.Id = authors.Max(a => a.Id) + 1;
+            entity.Id = GetComputedId();
             authors.Add(entity);
         }
-
+        public int GetComputedId()
+        {
+            return authors.Max(b => b.Id) + 1;
+        }
         public void Delete(int id)
         {
             var author = Find(id);

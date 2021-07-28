@@ -39,6 +39,7 @@ namespace BookStore.Controllers
         {
             var model = new BookAuthorViewModel
             {
+                BookId = _bookRepository.GetComputedId(),
                 Authors = _authorRepos.List().ToList()
             };
             return View(model);

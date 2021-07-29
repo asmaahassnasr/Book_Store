@@ -44,7 +44,7 @@ namespace BookStore.Controllers
         {
             var model = new BookAuthorViewModel
             {
-                BookId = _bookRepository.GetComputedId(),
+                BookId = _bookRepository.List().Max(b => b.Id) + 1,
                 Authors = _authorRepos.List().ToList()
             };
             return View(model);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +36,11 @@ namespace BookStore.Models.Repositories
         public IList<Author> List()
         {
             return db.Authors.ToList();
+        }
+
+        public List<Author> Search(string term)
+        {
+            return db.Authors.Include(a => a.FullName.Contains(term)).ToList();
         }
 
         public void Update(int id, Author entity)

@@ -93,6 +93,7 @@ namespace BookStore.Controllers
                 AuthorId = athId,
                 Title = book.Title,
                 Description = book.Description,
+                ImagUrl= book.ImageUrl,
                 Authors = _authorRepos.List().ToList()
             };
             return View(model);

@@ -20,6 +20,7 @@ namespace BookStore.ViewModels
         [StringLength(20, MinimumLength = 5)]
         public string Description { get; set; }
         public IFormFile File { get; set; }
+        public string ImagUrl { get; set; }
         public List<Author> Authors { get; set; }
     }
 }

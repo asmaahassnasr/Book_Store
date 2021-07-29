@@ -28,8 +28,8 @@ namespace BookStore
         {
             services.AddControllersWithViews();
             services.AddMvc();
-            services.AddSingleton<IBookRepository<Author>, AuthorRepository>();
-            services.AddSingleton<IBookRepository<Book>, BookRepository>();
+            services.AddScoped<IBookRepository<Author>, AuthorDbRepository>();
+            services.AddScoped<IBookRepository<Book>, BookDbRepository>();
             services.AddDbContext<BookStoreDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SQLCon"));

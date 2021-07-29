@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace BookStore.Controllers
 {
@@ -14,11 +16,14 @@ namespace BookStore.Controllers
     {
         private IBookRepository<Book> _bookRepository;
         private IBookRepository<Author> _authorRepos;
+        private IWebHostEnvironment _hostingEnvironment;
 
-        public BookController(IBookRepository<Book> bookRepository , IBookRepository<Author> authorRepos)
+        public BookController(IBookRepository<Book> bookRepository , IBookRepository<Author> authorRepos,IWebHostEnvironment hostingEnvironment)
         {
             _bookRepository = bookRepository;
             _authorRepos = authorRepos;
+            _hostingEnvironment = hostingEnvironment;
+
         }
         // GET: BookController
         public ActionResult Index()
@@ -52,12 +57,21 @@ namespace BookStore.Controllers
         {
             try
             {
+                string fileName = string.Empty;
+                if(model.File != null)
+                {
+                    string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                    fileName = model.File.FileName;
+                    string fullPath = Path.Combine(uploads, fileName);
+                    model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
+                }
                 Book b = new Book
                 {
                     Id = model.BookId,
                     Title = model.Title,
                     Description = model.Description,
-                    Author = _authorRepos.Find(model.AuthorId)
+                    Author = _authorRepos.Find(model.AuthorId),
+                    ImageUrl= fileName
                 };
                 _bookRepository.Add(b);
                 return RedirectToAction(nameof(Index));

@@ -176,5 +176,11 @@ namespace BookStore.Controllers
                 return ImageUrl;
             }
         }
+    
+    public ActionResult Search(string term)
+        {
+            var result = _bookRepository.Search(term);
+            return View("Index",result);
+        }
     }
 }

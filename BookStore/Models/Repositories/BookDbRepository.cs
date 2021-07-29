@@ -39,7 +39,7 @@ namespace BookStore.Models.Repositories
 
         public List<Book> Search(string term)
         {
-            var result = db.Books.Include(b => b.Title.Contains(term) || b.Description.Contains(term) 
+            var result = db.Books.Include(b => b.Author).Where(b => b.Title.Contains(term) || b.Description.Contains(term)
             || b.Author.FullName.Contains(term)).ToList();
             return result;
         }

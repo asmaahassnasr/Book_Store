@@ -118,10 +118,11 @@ namespace BookStore.Controllers
         // POST: BookController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult ConfirmDelete(int id)
         {
             try
             {
+                _bookRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

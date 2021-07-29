@@ -164,14 +164,11 @@ namespace BookStore.Controllers
 
                 //delete old file path
                 string oldPath = Path.Combine(uploads, ImageUrl);
-
-                if (newPath != oldPath)
-                {
                     //Delet old
                     System.IO.File.Delete(oldPath);
+
                     //Add new File pathe
                     file.CopyTo(new FileStream(newPath, FileMode.Create));
-                }
                 return file.FileName;
             }
             else

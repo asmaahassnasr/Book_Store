@@ -72,10 +72,11 @@ namespace BookStore.Controllers
         public ActionResult Edit(int id)
         {
             var book = _bookRepository.Find(id);
+            var athId = book.Author == null ? book.Author.Id=0 : book.Author.Id;
             var model = new BookAuthorViewModel
             {
                 BookId = book.Id,
-                AuthorId = book.Author.Id,
+                AuthorId = athId,
                 Title = book.Title,
                 Description = book.Description,
                 Authors = _authorRepos.List().ToList()

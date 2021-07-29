@@ -11,12 +11,12 @@ namespace BookStore.Models.Repositories
         public BookRepository()
         {
             books = new List<Book>() {
-            new Book{Id=1, Title="Book 001" , Description="This is book 001" } ,
-            new Book{Id=2, Title="Book 002" , Description="This is book 002" } ,
-            new Book{Id=3, Title="Book 003" , Description="This is book 003" } ,
-            new Book{Id=4, Title="Book 004" , Description="This is book 004" } ,
-            new Book{Id=5, Title="Book 005" , Description="This is book 005" } ,
-            new Book{Id=6, Title="Book 006" , Description="This is book 006" }
+            new Book{Id=1, Title="Book 001" , Description="This is book 001" , Author= new Author()} ,
+            new Book{Id=2, Title="Book 002" , Description="This is book 002" , Author= new Author()} ,
+            new Book{Id=3, Title="Book 003" , Description="This is book 003" , Author= new Author()} ,
+            new Book{Id=4, Title="Book 004" , Description="This is book 004", Author= new Author() } ,
+            new Book{Id=5, Title="Book 005" , Description="This is book 005" , Author= new Author()} ,
+            new Book{Id=6, Title="Book 006" , Description="This is book 006" , Author= new Author()}
             };
         }
         public void Add(Book entity)

@@ -119,7 +119,7 @@ namespace BookStore.Controllers
                     string oldFileName = _bookRepository.Find(model.BookId).ImageUrl;
                     string fullOldPath = Path.Combine(uploads, oldFileName);
 
-                    if(fullPath != fullOldPath)
+                    if (fullPath != fullOldPath)
                     {
                         //Delet old
                         System.IO.File.Delete(fullOldPath);

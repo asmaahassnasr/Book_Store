@@ -56,14 +56,7 @@ namespace BookStore.Controllers
         {
             try
             {
-                string fileName = string.Empty;
-                if(model.File != null)
-                {
-                    string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-                    fileName = model.File.FileName;
-                    string fullPath = Path.Combine(uploads, fileName);
-                    model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
-                }
+                string fileName = uploadFile(model.File) ?? string.Empty;
                 Book b = new Book
                 {
                     Id = model.BookId,
@@ -107,25 +100,7 @@ namespace BookStore.Controllers
             try
             {
                 var author = _authorRepos.Find(model.AuthorId);
-                string fileName = string.Empty;
-                if (model.File != null)
-                {
-                    string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-                    fileName = model.File.FileName;
-                    string fullPath = Path.Combine(uploads, fileName);
-
-                    //delete old file path
-                    string oldFileName = model.ImagUrl;
-                    string fullOldPath = Path.Combine(uploads, oldFileName);
-
-                    if (fullPath != fullOldPath)
-                    {
-                        //Delet old
-                        System.IO.File.Delete(fullOldPath);
-                        //Add new File pathe
-                        model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
-                    }
-                }
+                string fileName = uploadFile(model.File,model.ImagUrl)?? string.Empty;
                 Book book = new Book
                 {
                     Id=model.BookId,
@@ -163,6 +138,45 @@ namespace BookStore.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        string uploadFile(IFormFile file)
+        {
+            if (file != null)
+            {
+                string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                string fullPath = Path.Combine(uploads, file.FileName);
+                file.CopyTo(new FileStream(fullPath, FileMode.Create));
+                return file.FileName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        string uploadFile(IFormFile file, string ImageUrl)
+        {
+            if (file != null)
+            {
+                string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                string newPath = Path.Combine(uploads, file.FileName);
+
+                //delete old file path
+                string oldPath = Path.Combine(uploads, ImageUrl);
+
+                if (newPath != oldPath)
+                {
+                    //Delet old
+                    System.IO.File.Delete(oldPath);
+                    //Add new File pathe
+                    file.CopyTo(new FileStream(newPath, FileMode.Create));
+                }
+                return file.FileName;
+            }
+            else
+            {
+                return ImageUrl;
             }
         }
     }

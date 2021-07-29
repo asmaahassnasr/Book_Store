@@ -23,10 +23,7 @@ namespace BookStore.Models.Repositories
         {
             books.Add(entity);
         }
-        public int GetComputedId()
-        {
-            return  books.Max(b => b.Id) + 1;
-        }
+        
         public void Delete(int id)
         {
             var book = Find(id);

@@ -32,11 +32,6 @@ namespace BookStore.Models.Repositories
             return book;
         }
 
-        public int GetComputedId()
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<Book> List()
         {
             return db.Books.Include(b => b.Author).ToList();

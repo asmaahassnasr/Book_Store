@@ -31,10 +31,6 @@ namespace BookStore.Models.Repositories
             return author;
         }
 
-        public int GetComputedId()
-        {
-            throw new NotImplementedException();
-        }
 
         public IList<Author> List()
         {

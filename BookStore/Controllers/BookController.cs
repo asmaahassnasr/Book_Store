@@ -111,7 +111,8 @@ namespace BookStore.Controllers
         // GET: BookController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var book = _bookRepository.Find(id);
+            return View(book);
         }
 
         // POST: BookController/Delete/5

@@ -33,11 +33,13 @@
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+            <input hidden asp-for="ImagUrl" class="form-control" />
+
             <div class="form-group">
                 <label asp-for="File" class="control-label"></label>
                 <input type="file" name="File" asp-for="File" class="form-control" />
                 <span asp-validation-for="File" class="text-danger"></span>
-                <img src="~/uploads/@Model.ImagUrl" style="width:128px;" class="img-thumbnail"/>
+                <img src="~/uploads/@Model.ImagUrl" style="width:128px;" class="img-thumbnail" />
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>

@@ -44,7 +44,6 @@ namespace BookStore.Controllers
         {
             var model = new BookAuthorViewModel
             {
-                BookId = _bookRepository.List().Max(b => b.Id) + 1,
                 Authors = _authorRepos.List().ToList()
             };
             return View(model);
@@ -116,7 +115,7 @@ namespace BookStore.Controllers
                     string fullPath = Path.Combine(uploads, fileName);
 
                     //delete old file path
-                    string oldFileName = _bookRepository.Find(model.BookId).ImageUrl;
+                    string oldFileName = model.ImagUrl;
                     string fullOldPath = Path.Combine(uploads, oldFileName);
 
                     if (fullPath != fullOldPath)
@@ -129,6 +128,7 @@ namespace BookStore.Controllers
                 }
                 Book book = new Book
                 {
+                    Id=model.BookId,
                     Title = model.Title,
                     Description = model.Description,
                     ImageUrl=fileName,

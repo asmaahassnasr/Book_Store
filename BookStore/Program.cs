@@ -16,17 +16,17 @@ namespace BookStore
     {
         public static void Main(string[] args)
         {
-            var webHost = CreateHostBuilder(args).Build();
-            RunMigration(webHost);
-            webHost.Run();
+             CreateHostBuilder(args).Build().Run();
+            //RunMigration(webHost);
+           // webHost.Run();
         }
-        public static void RunMigration(IHost webHost)
-        {
-            using (var scope = webHost.Services.CreateScope()) {
-                var db = scope.ServiceProvider.GetRequiredService<BookStoreDbContext>();
-                db.Database.Migrate();
-            };
-        }
+        //public static void RunMigration(IHost webHost)
+        //{
+        //    using (var scope = webHost.Services.CreateScope()) {
+        //        var db = scope.ServiceProvider.GetRequiredService<BookStoreDbContext>();
+        //        db.Database.Migrate();
+        //    };
+        //}
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

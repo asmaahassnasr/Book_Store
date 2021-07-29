@@ -108,10 +108,30 @@ namespace BookStore.Controllers
             try
             {
                 var author = _authorRepos.Find(model.AuthorId);
+                string fileName = string.Empty;
+                if (model.File != null)
+                {
+                    string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                    fileName = model.File.FileName;
+                    string fullPath = Path.Combine(uploads, fileName);
+
+                    //delete old file path
+                    string oldFileName = _bookRepository.Find(model.BookId).ImageUrl;
+                    string fullOldPath = Path.Combine(uploads, oldFileName);
+
+                    if(fullPath != fullOldPath)
+                    {
+                        //Delet old
+                        System.IO.File.Delete(fullOldPath);
+                        //Add new File pathe
+                        model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
+                    }
+                }
                 Book book = new Book
                 {
                     Title = model.Title,
                     Description = model.Description,
+                    ImageUrl=fileName,
                     Author = author
                 };
                 _bookRepository.Update(model.BookId, book);
